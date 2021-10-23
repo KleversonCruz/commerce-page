@@ -10,6 +10,8 @@ This is a basic e-commerce page for educational purposes.
 * ✔️ Built with React and NextJS.
 * ✔️ Multiple shops in only one website.
 * ✔️ Tailwind components.
+* ✔️ Dark mode.
+* ✔️ Theme colors change in runtime.
 
 ## Getting Started
 
