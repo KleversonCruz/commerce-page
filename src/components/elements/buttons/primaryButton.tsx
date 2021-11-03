@@ -4,6 +4,7 @@ interface PrimaryButtonProps {
     className?: string
     type?: 'button' | 'submit'
     tabIndex?: number
+    disabled?: boolean
 }
 
 export default function PrimaryButton(props: PrimaryButtonProps) {
@@ -15,6 +16,7 @@ export default function PrimaryButton(props: PrimaryButtonProps) {
             ${props.className}`}
             onClick={props.onClick}
             tabIndex={props.tabIndex}
+            disabled={props.disabled}
         >
             {props.children}
         </button>

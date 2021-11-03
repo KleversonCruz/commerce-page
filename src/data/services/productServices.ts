@@ -1,9 +1,7 @@
-import Product from "@data/core/Product";
 import { api } from "@data/services/api";
 
 export async function GetProducts(queryParams?: any) {
     const { shopId, categoryId, page, name, limit } = queryParams || {};
-
     var response = await api.get(`/Product`, { params: { shopId, categoryId, name, page, limit } })
         .then(response => {
             const json: any = response.data

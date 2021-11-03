@@ -1,24 +1,23 @@
+﻿import Customer from "./Customer"
 import Shop from "./Shop"
-import Customer from "./Customer"
-import CartItem from "./CartItem"
 
-export default class ShoppingSession {
+export default class Order {
     #id: number
     #total: number
     #customerId: number
     #customer: Customer
+    #orderItems: string[]
     #shopId: number
     #shop: Shop
-    #cartItems: CartItem[]
 
-    constructor(id: number, total: number, customerId: number, customer: Customer, shopId: number, shop: Shop, cartItems: CartItem[]) {
+    constructor(id: number, total: number, customerId: number, customer: Customer, orderItems: string[], shopId: number, shop: Shop) {
         this.#id = id
         this.#total = total
         this.#customerId = customerId
         this.#customer = customer
+        this.#orderItems = orderItems
         this.#shopId = shopId
         this.#shop = shop
-        this.#cartItems = cartItems
     }
 
     get id() {
@@ -37,6 +36,10 @@ export default class ShoppingSession {
         return this.#customer
     }
 
+    get orderItems() {
+        return this.#orderItems
+    }
+
     get shopId() {
         return this.#shopId
     }
@@ -45,31 +48,39 @@ export default class ShoppingSession {
         return this.#shop
     }
 
-    get cartItems() {
-        return this.#cartItems
-    }
-
     toObject() {
         return {
             id: this.#id,
             total: this.#total,
             customerId: this.#customerId,
             customer: this.#customer,
+            orderItems: this.#orderItems,
             shopId: this.#shopId,
             shop: this.#shop,
-            cartItems: this.#cartItems.map(resp => resp.toObject()),
         }
     }
 
-    static createObject(obj: ShoppingSession): ShoppingSession {
-        return new ShoppingSession(
+    static createVoid() {
+        return new Order(
+            0,
+            0,
+            0,
+            null,
+            null,
+            0,
+            null,
+        )
+    }
+
+    static createObject(obj: Order): Order {
+        return new Order(
             obj.id,
             obj.total,
             obj.customerId,
             obj.customer,
+            obj.orderItems,
             obj.shopId,
             obj.shop,
-            obj.cartItems,
         )
     }
 }

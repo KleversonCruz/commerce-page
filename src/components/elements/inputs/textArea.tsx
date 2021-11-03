@@ -18,8 +18,8 @@ export default function TextArea(props: TextAreaProps) {
                     {...register(props.id)}
                     placeholder={props.placeholder}
                     rows={props?.rows ?? 3}
-                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 block w-full sm:text-sm border rounded-md
-                    bg-gray-50 dark:bg-warmGray-900 border-gray-300 dark:border-warmGray-700
+                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 block w-full sm:text-sm rounded-md
+                    bg-gray-100 dark:bg-warmGray-800 border-gray-100 dark:border-warmGray-900
                     ${props.className}`}
                 />
             </div>

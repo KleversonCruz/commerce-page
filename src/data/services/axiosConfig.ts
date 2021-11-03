@@ -4,9 +4,8 @@ import { parseCookies } from "nookies";
 export function getAPIClient() {
     const { 'client.auth.token': token } = parseCookies()
     const https = require('https');
-
     const api = axios.create({
-        baseURL: 'https://localhost:5001',
+        baseURL: 'https://kwcruz.com.br',
         httpsAgent: new https.Agent({
             rejectUnauthorized: false
         })

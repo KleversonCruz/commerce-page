@@ -7,6 +7,10 @@ interface FormGroupProps {
     placeholder?: string
     className?: string
     readonly?: boolean
+    onBlur?: (e) => void
+    maxLength?: number
+    minLength?: number
+    defaultValue?: string
 }
 
 export default function FormGroup(props: FormGroupProps) {
@@ -22,9 +26,13 @@ export default function FormGroup(props: FormGroupProps) {
                 readOnly={props.readonly}
                 {...register(props.id)}
                 placeholder={props.placeholder}
-                className={`mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full shadow-sm sm:text-sm  rounded-md
-                    bg-gray-50 dark:bg-warmGray-900 border-gray-300 dark:border-warmGray-700
+                className={`mt-1 focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm rounded-md
+                bg-gray-100 dark:bg-warmGray-800 border-gray-100 dark:border-warmGray-900
                     ${props.className}`}
+                onBlur={props.onBlur}
+                maxLength={props.maxLength}
+                minLength={props.minLength}
+                defaultValue={props.defaultValue}
             />
         </>
     )

@@ -1,18 +1,23 @@
+import ImageInput from "@components/elements/images/image"
+import Link from "@components/elements/links/link"
 import useApp from "@data/hooks/UseApp"
-import { api } from "@data/services/api"
 
 export default function Brand() {
     const { shop } = useApp()
 
     return (
-        shop?.imageUrl ? (
-            <img
-                className="h-8 w-auto"
-                src={`${api.defaults.baseURL}/images/${shop?.imageUrl}`}
-                alt="Workflow"
-            />
+        shop?.brandImageUrl ? (
+            <Link>
+                <a href="">
+                    <ImageInput src={shop?.brandImageUrl} alt="logo da marca" className="h-8 w-auto" />
+                </a>
+            </Link>
         ) : (
-            <h1 className="text-xl font-bold text-th-accent-medium">{shop.name}</h1>
+            <Link>
+                <a href="">
+                    <h1 className="text-xl font-bold text-th-accent-medium">{shop.name}</h1>
+                </a>
+            </Link>
         )
     )
 }

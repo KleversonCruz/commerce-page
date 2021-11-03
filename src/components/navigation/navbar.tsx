@@ -3,22 +3,22 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { LoginIcon, MenuIcon, ShoppingBagIcon, UserIcon, XIcon } from '@heroicons/react/outline'
 import useApp from '@data/hooks/UseApp'
 import Link from 'next/link'
-import ShoppingBag from '@components/Overlays/shoppingBag'
 import Brand from '@components/layout/brand'
 import useAuth from '@data/hooks/UseAppAuth'
 import { CartContext } from '@data/contexts/CartContext'
 import { useTheme } from 'next-themes'
+import FormModal from '@components/Overlays/formModal'
+import SignInForm from '@components/forms/signInForm'
 
 export default function Navbar() {
-    const [openBag, setOpenBag] = useState(false)
+    const [isSignInCardOpen, setSignInCardOpen] = useState(false)
     const { shop } = useApp()
     const { isAuthenticated, signOut } = useAuth()
     const { setTheme } = useTheme();
-    const items = useContext(CartContext);
+    const { items, setBagOpen } = useContext(CartContext);
 
     useEffect(() => {
         setTheme(shop?.colorTheme)
-        console.log('Mudou o tema')
     }, [shop, setTheme]);
 
     const navigation = [
@@ -38,7 +38,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Disclosure as="nav" className="bg-gray-100 dark:bg-warmGray-800 text-gray-900 dark:text-gray-100 top-0 z-10 fixed w-full shadow">
+            <Disclosure as="nav" className="bg-white dark:bg-warmGray-800 text-gray-900 dark:text-gray-100 top-0 z-10 fixed w-full shadow">
                 {({ open }) => (
                     <>
                         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -77,21 +77,19 @@ export default function Navbar() {
                                     <button
                                         type="button"
                                         className="p-1 rounded-full text-gray-400 hover:text-th-accent-medium focus:outline-none flex items-center"
-                                        onClick={() => setOpenBag(true)}
+                                        onClick={() => setBagOpen(true)}
                                     >
                                         <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
-                                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{items.length}</span>
+                                        <span className="ml-2 text-sm font-medium text-th-accent-medium">{items.length}</span>
                                     </button>
 
                                     {!isAuthenticated ? (
-                                        <Link href={`${shop.url}/entrar`} passHref>
-                                            <a
-                                                type="button"
-                                                className="ml-3 p-1 rounded-full text-gray-400 hover:text-th-accent-medium focus:outline-none"
-                                            >
-                                                <LoginIcon className="h-6 w-6" aria-hidden="true" />
-                                            </a>
-                                        </Link>
+                                        <button
+                                            className="ml-3 p-1 rounded-full text-gray-400 hover:text-th-accent-medium focus:outline-none"
+                                            onClick={() => setSignInCardOpen(true)}
+                                        >
+                                            <LoginIcon className="h-6 w-6" aria-hidden="true" />
+                                        </button>
                                     ) : (
                                         <Menu as="div" className="relative">
                                             {({ open }) => (
@@ -157,7 +155,9 @@ export default function Navbar() {
                 )}
             </Disclosure>
 
-            <ShoppingBag setOpen={setOpenBag} open={openBag} />
+            <FormModal open={isSignInCardOpen} setOpen={setSignInCardOpen}>
+                <SignInForm setOpen={setSignInCardOpen} />
+            </FormModal>
         </>
     )
 }
