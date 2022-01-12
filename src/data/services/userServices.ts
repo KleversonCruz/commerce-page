@@ -8,7 +8,7 @@ export async function signInUser(user: UserSignIn): Promise<any> {
         "userName": user.userName
     });
 
-    var response = await api.post('/User/Login', data)
+    var response = await api.post('/user/Login', data)
         .then(response => {
             const json: any = response.data
             return {
@@ -26,7 +26,7 @@ export async function signInUser(user: UserSignIn): Promise<any> {
 export async function registerUser(user: User): Promise<any> {
     var data = JSON.stringify(user);
 
-    var response = await api.post('/User/Register', data)
+    var response = await api.post('/user/Register', data)
         .then(response => {
             const json: any = response.data
             return {
@@ -43,7 +43,7 @@ export async function registerUser(user: User): Promise<any> {
 
 export async function getUserInformation(): Promise<any> {
 
-    var response = await api.get('/User')
+    var response = await api.get('/user')
         .then(response => {
             const json = response.data
             return {

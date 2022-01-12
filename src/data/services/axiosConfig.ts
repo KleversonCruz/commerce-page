@@ -5,7 +5,7 @@ export function getAPIClient() {
     const { 'client.auth.token': token } = parseCookies()
     const https = require('https');
     const api = axios.create({
-        baseURL: 'https://kwcruz.com.br',
+        baseURL: '/api/',
         httpsAgent: new https.Agent({
             rejectUnauthorized: false
         })

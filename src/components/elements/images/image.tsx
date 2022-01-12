@@ -10,7 +10,7 @@ interface ImageProps {
 export default function Image(props: ImageProps) {
     return (
         <img
-            src={props.ignoreBaseUrl ? props.src : `${api.defaults.baseURL}/images/${props.src}`}
+            src={props.ignoreBaseUrl ? props.src : `/images/${props.src}`}
             alt={props.alt}
             className={props.className}
         />

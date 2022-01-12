@@ -2,7 +2,7 @@ import Shop from "@data/core/Shop";
 import { api } from "@data/services/api";
 
 export async function GetShops(name?: string, limit?: number, page?: number): Promise<any> {
-    var response = await api.get('/Shop', { params: { name, limit, page } })
+    var response = await api.get('/shop', { params: { name, limit, page } })
         .then(response => {
             const json: any = response.data
             if (json) {
@@ -25,7 +25,7 @@ export async function GetShops(name?: string, limit?: number, page?: number): Pr
 }
 
 export async function GetShopById(shopId: number) {
-    var response = await api.get(`/Shop/${shopId}`)
+    var response = await api.get(`/shop/${shopId}`)
         .then(response => {
             const json = response.data
             if (json) {
